@@ -1,4 +1,4 @@
 node_modules/
 .env
 combined.log
-src/config/config.jsonnode_modules/
+src/config/config.js
