@@ -39,11 +39,7 @@ async function getAirplaneById(id) {
             console.log(airplane);
             return airplane;
       } catch (error) {
-            console.log(error);
-            throw new AppError(
-                  "Cannot fetch airplane",
-                  StatusCodes.INTERNAL_SERVER_ERROR,
-            );
+            throw error;
       }
 }
 

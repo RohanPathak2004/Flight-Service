@@ -44,11 +44,7 @@ async function getAirplaneById(req, res) {
       try {
             const id = req.params.id;
             const airplane = await AirplaneService.getAirplaneById(id);
-            if (!airplane) {
-                  return res
-                        .status(StatusCodes.NOT_FOUND)
-                        .json(message.notFound("airplane"));
-            }
+            
             SuccessResponse.data = airplane;
             return res.status(StatusCodes.OK).json(SuccessResponse);
       } catch (error) {
