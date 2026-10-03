@@ -14,10 +14,11 @@
     "dotenv": "^17.4.2",
     "express": "^5.2.1",
     "http-status-codes": "^2.3.0",
-    "mysql2": "^3.24.4",
-    "nodemon": "^3.1.14",
+    "mysql2": "^3.24.5",
+    "nodemon": "^1.14.10",
     "sequelize": "^6.37.8",
     "sequelize-cli": "^6.6.5",
-    "winston": "^3.19.0"
+    "winston": "^3.19.0",
+    "zod": "^4.6.5"
   }
 }
