@@ -37,7 +37,7 @@ npx sequelize init
 ```
 
 
-- By executing the above command you will get migrations and seeders folder along with a config.json inside the cnofig folder.
+- By executing the above command you will get migrations and seeders folder along with a config.json inside the config folder.
 
 - if you are setting up your development enviroment, then write the username of your: db, password of your db and in dialect mention whatever db you are using for example: mysql, mariadb
 
