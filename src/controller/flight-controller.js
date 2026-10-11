@@ -1,6 +1,6 @@
 const { StatusCodes } = require("http-status-codes");
 const { FlightService } = require("../service");
-const { SuccessResponse } = require("../utils/common");
+const { SuccessResponse,createErrorResponse } = require("../utils/common");
 const message = require("../utils/Strings/message-strings");
 
 async function createFlight(req, res) {
@@ -14,6 +14,7 @@ async function createFlight(req, res) {
                   arrivalTime: req.body.arrivalTime,
                   boardingGate: req.body.boardingGate,
                   totalSeats: req.body.totalSeats,
+                  price: req.body.price,
             };
 
             const flight = await FlightService.createFlight(flightResponseBody);
@@ -21,6 +22,7 @@ async function createFlight(req, res) {
             SuccessResponse.message = message.created("flight");
             return res.status(StatusCodes.CREATED).json(SuccessResponse);
       } catch (error) {
+            console.log(error);
             const ErrorResponse = createErrorResponse(
                   message.somethingWentWrong,
                   error,

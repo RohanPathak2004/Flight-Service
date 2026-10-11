@@ -19,11 +19,12 @@ function validateCreateAirport(req, res, next) {
       // }
 
       const result = AirportSchema.safeParse(req.body);
-      if (!result) {
+      if (!result.success) {
             const error = result.error.flatten();
             ErrorResponse = createErrorResponse(message.somethingWentWrong, error);
             return res.status(StatusCodes.BAD_REQUEST).json(ErrorResponse);
       }
+      console.log("PARSED SUCCESSFULLY", "AIRPORT SCHEMA",result);
       next();
 }
 

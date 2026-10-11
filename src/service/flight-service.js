@@ -1,6 +1,7 @@
 const FlightRepository = require("../repositories/flight-repository");
-
-
+const { StatusCodes } = require("http-status-codes");
+const AppError = require("../utils/errors/app-error");
+const message = require("../utils/Strings/message-strings");
 const flightRepository = new FlightRepository();
 
 
@@ -10,6 +11,7 @@ async function createFlight(data) {
             const flight = await flightRepository.create(data);
             return flight;
       } catch (error) {
+            console.log(error);
             if (
                   error.name === "SequelizeValidationError" ||
                   error.name === "SequelizeUniqueConstraintError"

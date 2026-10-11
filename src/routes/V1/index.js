@@ -13,6 +13,6 @@ router.get('/info', InfoController.info);
 router.use('/airplanes', airplaneRoutes);
 router.use('/cities', cityRoutes);
 router.use('/airports', airportRoutes);
-router.use('flights', flightRoutes);
+router.use('/flights', flightRoutes);
 
 module.exports = router;

@@ -9,7 +9,7 @@ function validateCreateFlight(req, res, next) {
 
             const validate = FlightSchema.safeParse(flightRequestBody);
 
-            if (!validate) {
+            if (!validate.success) {
                   const errors = validate.error.flatten();
                   const ErrorResponse = createErrorResponse(
                         message.somethingWentWrong,

@@ -4,7 +4,7 @@ const AirportSchema = z.object({
       name: z.string().trim().min(1),
       code: z.string().trim().min(1),
       address: z.string().trim().min(1).optional(),
-      cityId: z.number().positive(),
+      cityId: z.coerce.number().positive(),
 });
 
 module.exports = AirportSchema;
