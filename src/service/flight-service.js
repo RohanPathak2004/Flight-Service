@@ -85,7 +85,10 @@ async function updateFlight(id, data) {
 }
 
 async function getAllFlightsByQuery(query) {
-      const customFilter = {};
+      let customFilter = {};
+      let sortFilter = [];
+      //trips = BLR-DEL
+      
       if (query.trips) {
             const [departureAirportId, arrivalAirportId] =
                   query.trips.split("-");
@@ -99,16 +102,41 @@ async function getAllFlightsByQuery(query) {
                   );
             }
       }
+      //MIN-MAX
       if (query.price) {
             const [minPrice, maxPrice] = query.price.split("-");
             customFilter.price = {
-                  [Op.between]: [minPrice, maxPrice],
+                  [Op.between]: [minPrice ?? 0, maxPrice ?? 20000],
             };
       }
-      //trips = BLR-DEL
+      // travellers=3 etc
+      if (query.travellers) {
+            customFilter.totalSeats = {
+                  [Op.gte]: query.travellers,
+            };
+      }
+      //triDate=2026-10-14
+      if (query.tripDate) {
+            const currentDate = new Date(query.tripDate);
+            console.log(currentDate);
+            const nextDateObj = new Date(currentDate);
+            nextDateObj.setDate(nextDateObj.getDate() + 1);
+            const nextDate = nextDateObj.toISOString();
+            customFilter.departureTime = {
+                  [Op.gte]: currentDate,
+                  [Op.lt]: nextDate,
+            };
+      }
+
+      //departureTime_DESC,price_ASC 
+      if (query.sort) {
+            const sortQuery = query.sort.split(",");
+            let sortingFilters = sortQuery.map((order) => order.split("_"));
+            sortFilter = sortingFilters;
+      }
       try {
             const flights =
-                  await flightRepository.getAllFlightsByQuery(customFilter);
+                  await flightRepository.getAllFlightsByQuery(customFilter,sortFilter);
             return flights;
       } catch (error) {
             console.log(error);
